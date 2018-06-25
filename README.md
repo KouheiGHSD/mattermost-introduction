@@ -59,3 +59,4 @@
   * 「使い方」の章についてはここから入れられるだけ入れたい（調整ポイント）
 * [Software Design 2016年1月号｜技術評論社](http://gihyo.jp/magazine/SD/archive/2016/201601)
 * [技術評論社ソフトウェアデザイン編集長による「技術書原稿執筆の心得」 \- Togetter](https://togetter.com/li/835478)
+
