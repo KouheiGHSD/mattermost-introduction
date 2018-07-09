@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ysknmt/mattermost-introduction.svg?branch=master)](https://travis-ci.org/ysknmt/mattermost-introduction)
+
 # Mattermost紹介記事を書きたい
 
 ## 目的

@@ -1,0 +1,31 @@
+{
+  "name": "mattermost-introduction",
+  "version": "0.0.1",
+  "description": "Mattermost紹介記事",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "textlint": "textlint --debug -f pretty-error docs/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ysknmt/mattermost-introduction.git"
+  },
+  "keywords": [
+    "mattermost"
+  ],
+  "author": "ysknmt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ysknmt/mattermost-introduction/issues"
+  },
+  "homepage": "https://github.com/ysknmt/mattermost-introduction#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "textlint": "^10.2.1",
+    "textlint-rule-no-mix-dearu-desumasu": "^3.0.3"
+  }
+}

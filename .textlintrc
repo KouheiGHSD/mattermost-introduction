@@ -1,0 +1,8 @@
+{
+  "filters": {},
+  "rules": {
+    "no-mix-dearu-desumasu": {
+      "strict": true
+    }
+  }
+}
