@@ -8,7 +8,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "textlint": "textlint --debug -f pretty-error docs/"
+    "textlint": "textlint --debug -f pretty-error docs/",
+    "toc": "echo \"\" > toc.md && yarn run toc-1 && yarn run toc-2 && yarn run toc-3",
+    "toc-1": "markdown-toc ./docs/1_Introduction/article.md >> toc.md && echo \"\n\" >> toc.md",
+    "toc-2": "markdown-toc ./docs/2_Usage/article.md >> toc.md && echo \"\n\" >> toc.md",
+    "toc-3": "markdown-toc ./docs/3_Advanced/article.md >> toc.md && echo \"\n\" >> toc.md"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,7 @@
   "homepage": "https://github.com/ysknmt/mattermost-introduction#readme",
   "dependencies": {},
   "devDependencies": {
+    "markdown-toc": "^1.2.0",
     "textlint": "^10.2.1",
     "textlint-rule-no-mix-dearu-desumasu": "^3.0.3"
   }
