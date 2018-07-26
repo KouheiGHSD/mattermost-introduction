@@ -1,4 +1,4 @@
-# Mattermostの統合機能を開発する
+# 第3回: Mattermostプラグイン開発
 
 Mattermostの統合機能は自分たちでも開発することができます。
 前号でも紹介しましたが、Mattermostと外部サービスを連携する統合機能には、下記のような複数の方法があります。
@@ -9,13 +9,13 @@ Mattermostの統合機能は自分たちでも開発することができます�
 
 今号では、Mattermostプラグインの開発方法について紹介していきます。
 
-## Mattermostプラグイン機能
+## プラグイン機能とは
 
 Mattermost v4.4.0から、ウェブフック、カスタムスラッシュコマンドに続く統合機能としてプラグイン機能が追加されています。プラグイン機能はMattemostに対して柔軟な機能追加を行うことができ、組織内のコミュニケーション基盤としてのMattermostを一層強化できる可能性を秘めています。
 
 プラグイン機能は2018/6/25現在ベータ版のため、今後破壊的な変更がないとは言い切れませんが、ここではMattermost v5.0.0リリース段階でのプラグイン開発方法について紹介していきます。
 
-# Mattermost開発者向けドキュメント
+### Mattermost開発者向けドキュメント
 
 プラグイン開発を行う際は、最近公開されたばかりのMattermost開発者向けドキュメントサイトが参考になります。
 https://developers.mattermost.com/
@@ -29,23 +29,23 @@ https://github.com/mattermost/mattermost-developer-documentation
 
 https://github.com/mattermost/mattermost-plugins
 
-# Mattermostプラグインについて
+### Mattermostプラグインの種類
 
 Mattermostプラグインでは、サーバーサイドとフロントエンド両方の拡張が行えます。
 MattermostはサーバーサイドがGo言語、フロントエンドがReact.jsで開発されているため、この二つのプラグインは基本的には別物（協調することも可能）です。
 今回は主にサーバーサイドプラグインの開発方法について紹介していきますが、それぞれのプラグインで出来ることについてここで簡単に紹介します。
 
-## serverプラグイン
+#### Serverプラグイン
 
-サーバーサイドに処理を追加できるserverプラグインでは下記のようなことができます。
+サーバーサイドに処理を追加できるServerプラグインでは下記のようなことができます。
 
-### スラッシュコマンドの登録
+##### スラッシュコマンドの登録
 既存のカスタムスラッシュコマンド機能では、スラッシュコマンドを実行した際にMattermostからの送信されるリクエストを処理するためのサーバーアプリケーションを起動しておかなくてはいけませんでしたが、プラグインではMattermostサーバー内でその処理を行うことができます。
 これによりスラッシュコマンド用のサーバーを管理する必要がなくなるため、インフラ運用コストを削減することができます。
 
 実際に行える処理としては、プラグイン専用のAPIを通じたメッセージ、チャンネル、ユーザーなどのCRUD操作に加えプラグイン用のKeyValueStoreも使用できるようになっているため、大抵のことは実現できると思います。
 
-### Post Interception
+##### Post Interception
 2018/6/16にリリースされたMattermost v5.0.0からserverプラグインにPost Interceptionの機能が追加されました。
 
 この機能はMattermostに投稿されたメッセージがデータベースに保存される処理の前後に処理を追加できる機能です。Post Interceptionを使うことで、不適切な発言のフィルタリングや特定文字列の置き換えを自動で行うことができます。
@@ -53,11 +53,11 @@ MattermostはサーバーサイドがGo言語、フロントエンドがReact.js
 MattermostのCTOが特定文字列をURLリンクに変換するプラグインを公開しているので、実際の実装についてはこちらが参考になるかと思います。
 https://github.com/mattermost/mattermost-plugin-autolink
 
-## webappプラグイン
+#### webappプラグイン
 
 フロントエンド側の機能を拡張できるwebappプラグインでは下記のことが実現できます。
 
-### React Componentの上書き
+##### React Componentの上書き
 Mattermostの画面を構成しているReactComponentの一部を上書きすることができます。
 ただし、あるReactComponentを上書きする場合、そのComponentから呼ばれる子コンポーネントとの関係なども考えながら開発する必要があるため、コアとなるコンポーネントを上書きしようとすると多大な開発コストがかかるようになってしまう点に注意が必要です。
 
@@ -68,7 +68,7 @@ Mattermostの画面を構成しているReactComponentの一部を上書きす�
 Mattermostコアチームのメンバーが開発しているサンプルアプリは下記になります。
 https://github.com/jwilander/hovercardexample
 
-### チャンネルヘッダーボタンの追加
+##### チャンネルヘッダーボタンの追加
 Mattermostチャンネルのヘッダー部分にボタンを追加することができる拡張ポイントです。
 Mattermostではビデオ会議用の[Zoom](https://zoom.us/)というサービス用のボタンを追加するプラグインがデフォルトでインストールされています。
 
@@ -76,22 +76,22 @@ Mattermostではビデオ会議用の[Zoom](https://zoom.us/)というサービ�
 
 https://github.com/mattermost/mattermost-plugin-zoom
 
-## Mattermostプラグインのファイル形式
+### Mattermostプラグインのファイル形式
 
 Mattermostプラグインの実体は`.tar.gz`形式の圧縮ファイルとなります。
 サーバープラグインでは、この圧縮ファイルの中身として最低限必要なファイルは**マニフェストファイル**と**実行バイナリ**の二つだけです。
 
-### マニフェストファイル
+#### マニフェストファイル
 JSON形式かYAML形式で、プラグインのID、名前、バージョンや実行バイナリのパスなどのメタ情報を記述するファイルです。個人的にはJSONよりコメントが書けるYAMLの方が好きです。
 
 マニフェストファイルのリファレンスには下記になります。
 https://developers.mattermost.com/extend/plugins/server/hello-world/
 
-### 実行バイナリ
+#### 実行バイナリ
 Goプログラムをビルドして生成できるバイナリファイルです。
 Mattermostサーバーが動作しているサーバーOS(Windows、Linux、Macなど)に合わせてGoプログラムをビルド必要があります。
 
-## プラグインのインストール
+### プラグインのインストール
 
 上述の**マニフェストファイル**と**実行バイナリ**を`tar.gz`形式で圧縮した、下記のようなファイルがMattermostプラグインとなります。
 
@@ -109,11 +109,11 @@ mattermost-plugin.tar.gz
 このあたりについて、詳しくはHello Worldプラグインのチュートリアルドキュメントを参照してください。
 https://developers.mattermost.com/extend/plugins/server/hello-world/
 
-# Mattermostプラグイン開発
+## Mattermostプラグイン開発
 
 ここからは実際のMattermostプラグインの開発方法について紹介します。
 
-## ディレクトリ作成
+### ディレクトリ作成
 
 基本的に作業用のディレクトリは好きな場所に作ればよいのですが、Go言語公式の依存ライブラリ管理ツールの`dep`を使用する場合、環境変数`GOPATH`配下のディレクトリで作業する必要があります。
 
@@ -127,7 +127,7 @@ Go言語の慣習として、プロジェクトのディレクトリは`$GOPATH/
 
 `GOPATH`などのGo言語の開発環境に関する説明については、多くの記事が公開されていますのでググってください。
 
-## マニフェストファイル作成
+### マニフェストファイル作成
 
 作業用のディレクトリが作成できたら、その直下にプラグインの定義ファイル`plugin.yaml`を作成します。
 
@@ -144,7 +144,7 @@ https://developers.mattermost.com/extend/plugins/manifest-reference/#id
 
 `plugin.yaml`の中で`backend.executable: compliance-plugin`を指定しているので、`compliance-plugin`という実行バイナリを作れば良いということになります。
 
-## Goプログラム開発
+### Goプログラム開発
 
 次に、実行バイナリ`compliance-plugin`を作成するために、下記のようなGoプログラムを`server/plugin.go`という名前で作成します。
 
@@ -198,7 +198,7 @@ Go言語では`main`パッケージの`main`メソッドが実行バイナリの
 以上のように、これはプラグイン内でスラッシュコマンドの登録と実行を行うコードとなります。
 ここではGoプログラムについての詳しい解説は行うつもりはないため、コードの説明はこれまでとなります。
 
-## ビルド: 実行バイナリの作成
+### ビルド: 実行バイナリの作成
 
 上記のコードをビルドするには`go-build`コマンドを使いますが、その前に上記のプラグインコードでは`github.com/mattermost/mattermost-server`パッケージを使用しているため、この依存ライブラリのダウンロードが必要です。
 `ディレクトリ作成`で紹介した通り、`GOPATH/src`配下にディレクトリを作成している場合は下記のように`dep`のインストールとセットアップを行ってください。
@@ -228,7 +228,7 @@ GOOS=linux GOARCH=amd64 go build -o compliance-plugin server/main.go
 これら２つの値に使用できる値は下記のドキュメントを参考にしてください。
 https://golang.org/doc/install/source#environment
 
-## tar.gz形式への変換
+### tar.gz形式への変換
 
 実行バイナリ `compliance-plugin` が作成できたら、`tar`コマンドを使ってマニフェストファイルと共に.tar.gz形式に圧縮します。
 
@@ -243,13 +243,13 @@ tar -czvf compliance-plugin.tar.gz compliance-plugin plugin.yaml
 
 ![Uploaded Plugin]()
 
-## コマンド実行
+### コマンド実行
 
 Mattermostチャンネルに戻り、登録されたコマンドを実行するとコンプライアンスラインへのリンクが投稿されます。
 
 ![Compliance Command]()
 
-# おわりに
+## おわりに
 
 以上がMattermost severプラグインの開発方法になります。
 Mattermostプラグインでは、今回紹介したスラッシュコマンド登録機能の他にも、プラグイン専用のHTTPエンドポイントを作成したり、システムコンソール画面への設定画面の追加などができます。

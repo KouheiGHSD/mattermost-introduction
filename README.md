@@ -17,44 +17,9 @@
 * Mattermostの様々な機能を試してみたい
 * Mattermostと連携する機能を作ってみたい
 
-# Mattermost特集 目次
+# 記事目次
 
-## 1. Mattermostことはじめ
-
-### 1.1 [ChatOpsとは](./docs/1_Introduction/1.1_WhatsMattermost.md)
-### 1.2 Mattermostの位置づけ(Slackなどと比較して) (1P)
-### ~~1.2 実際のユースケース(2P)~~
-
-### 1.3. [Mattermostを触ってみよう](./docs/1_Introduction/1.x_GettingStarted.md)
-* docker online previewでおためし
-* 起動からログイン、投稿、チャンネル作成など基本的な操作
-* その他のインストール方法は「ドキュメント見てね」程度に紹介
-
-### ~~1.4 デスクトップアプリ/モバイルアプリ~~
-
-## 2. Mattermostの運用
-
-### 2.1 [本格的なセットアップ](./docs/2_Usage/2.x_Setup.md)
-* 想定マシンスペック
-* Ubuntu?へのインストール方法
-* バックアップについて
-
-### 2.2. [Basic Usage - 使い方](./docs/2_Usage/2.x_posts.md)
-
-* Markdown, mathjax
-* メンション
-* [アカウント設定など](./docs/2_Usage/2.x_settings.md)
-
-## 3. 連携機能
-
-### 3.0 [連携機能概要](./docs/3_Advanced/3.0_integrations.md)
-### 3.1 [outgoing / incoming webhook](./docs/3_Advanced/3.1_webhook.md)
-
-### 3.2 [custom slash command](./docs/3_Advanced/3.2_slash_command.md)
-* Interactive Message Button (1P)
-### 3.3 [plugin(beta](./docs/3_Advanced/3.3_plugin.md)
-
-## 4. contributing(ページが余ったら)
+[Table Of Contents](./toc.md)
 
 # 参考資料
 * https://docs.mattermost.com/guides/user.html
