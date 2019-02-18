@@ -228,10 +228,10 @@ MattermostはWindows/Mac/Linuxいずれの環境でも起動することがで�
 
 ## Mattermostの起動
 Mattermostは、1行コマンドでMattermostを立ち上げられるプレビュー用のDockerイメージが用意されています。
-Dockerがインストールされた環境で下記のコマンドを実行してみてください。
+Dockerがインストールされた環境で下記のコマンドを実行してみてください。（ここでは執筆時点での最新版であるv5.8.0を指定しています)
 
 ```
-docker run --name mattermost-preview -d --publish 8065:8065 mattermost/mattermost-preview
+docker run --name mattermost-preview -d --publish 8065:8065 mattermost/mattermost-preview:5.8.0
 ```
 
 コマンド実行後 http://localhost:8065 にブラウザでアクセスすると、Mattermostのトップ画面が表示されるはずです。
@@ -286,6 +286,8 @@ Mattermostで使用できるMarkdown形式については、メッセージ入�
 ### ハッシュタグ
 Twitterなどと同じように、`#`のあとに３文字以上の言葉を続けることでハッシュタグを作成できます。日本語のハッシュタグも作成できます。(例: `#日本語`)
 ハッシュタグは自動でリンクとなり、そのリンクをクリックすると同じハッシュタグを持つ投稿を一覧することができます。
+
+![message_menu](./images/message_menu.png)
 
 ### フラグ
 後から見返したい有用なメッセージにはフラグを付けることができます。
@@ -348,11 +350,8 @@ Mattermostでは特定のユーザーだけでやり取りをするための非�
 皆が悩んでいることや嬉しかったことを気軽に呟ける場所を用意することで、今までのコミュニケーションでは見えなかったものが見えてくるはずです。
 
 
-
-
-
 ## おわりに
 今回の紹介は以上になります。
-Mattermostは日本での利用事例も増えてきており、見つけ次第Twitterアカウント @mattermost_jp で紹介をしていますので、是非フォローをお願いします。
+Mattermostは日本での利用事例も増えてきており、Twitterアカウント @mattermost_jp で紹介をしていますので、是非フォローをお願いします。
 
-次号からは本格的にMattermostの便利な使い方や連携機能について紹介していきます。
+次号からはMattermostの便利な使い方や連携機能について紹介していきます。
